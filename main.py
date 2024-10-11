@@ -1,4 +1,11 @@
+import os
+import time
+
+from dotenv import load_dotenv
 from modules.utils import get_date_range, get_mondays
+load_dotenv()
+
+import modules.bot
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
@@ -8,3 +15,5 @@ if __name__ == '__main__':
     mondays = get_mondays(start_date, end_date)
     print(dates)
     print(mondays)
+    while True:
+        time.sleep(1000)
