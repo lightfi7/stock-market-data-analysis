@@ -1,3 +1,4 @@
+import csv
 from datetime import datetime, timedelta
 
 
@@ -33,3 +34,29 @@ def get_mondays(start_date, end_date):
         start_date += timedelta(days=7)
 
     return mondays
+
+
+def generate_times(start_time_str, end_time_str, step_minutes=3):
+    start_time = datetime.strptime(start_time_str, "%H:%M")
+    end_time = datetime.strptime(end_time_str, "%H:%M")
+
+    times = []
+    current_time = start_time
+    while current_time <= end_time:
+        times.append(current_time.strftime("%H:%M"))
+        current_time += timedelta(minutes=step_minutes)
+
+    return times
+
+
+def write_to_csv(file_name, mondays, times):
+    with open(file_name, mode='w', newline='') as file:
+        writer = csv.writer(file)
+
+        # Write header row
+        writer.writerow(["Monday", "Entry Times"])
+
+        # Write each Monday with the corresponding entry times
+        for monday in mondays:
+            for time in times:
+                writer.writerow([monday, time])
