@@ -17,6 +17,7 @@ def get_date_range(start_date, end_date):
 
     return date_list
 
+
 def get_mondays(start_date, end_date):
     # Start from January 1st of the start year
     start_date = datetime.strptime(start_date, "%Y-%m-%d")
