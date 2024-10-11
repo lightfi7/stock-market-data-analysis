@@ -3,6 +3,7 @@ import time
 
 from dotenv import load_dotenv
 from modules.utils import get_date_range, get_mondays
+
 load_dotenv()
 
 import modules.bot
@@ -15,5 +16,10 @@ if __name__ == '__main__':
     mondays = get_mondays(start_date, end_date)
     print(dates)
     print(mondays)
+
+    bot = modules.bot.Bot()
+    bot.start()
+    bot.run(None)
+
     while True:
         time.sleep(1000)
