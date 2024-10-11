@@ -13,7 +13,6 @@ password = os.environ['OO_PASSWORD']
 # browser = webdriver.Chrome()
 # wait = WebDriverWait(browser, 30)
 
-
 class Bot:
     def __init__(self):
         self.browser = webdriver.Chrome()
