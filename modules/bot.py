@@ -42,7 +42,6 @@ class Bot:
 
         ###
 
-
         toggles = new_backtest_form.find_elements(By.CLASS_NAME, 'toggle')
 
         # Round Strikes to Nearest
@@ -212,31 +211,6 @@ class Bot:
 
         # SL
 
-        #
-
-
-        return
-
-
-        start_date_field = self.browser.find_element(By.XPATH,
-                                                     '//*[@id="headlessui-dialog-130"]/div/div[2]/div/form/div['
-                                                     '1]/div[2]/div/div[1]/div[2]/div/div[2]/div[1]/input')
-        start_date_field.send_keys(params['start_date'])
-
-        end_date_field = self.browser.find_element(By.XPATH,
-                                                   '//*[@id="headlessui-dialog-130"]/div/div[2]/div/form/div[1]/div['
-                                                   '2]/div/div[1]/div[2]/div/div[2]/div[2]/div[1]/input')
-
-        end_date_field.send_keys(params['end_date'])
-
-        # Ticker
-
-        #
-
-        # Common Strategies
-        common_strategies_button = self.wait.until(
-            EC.element_to_be_clickable((By.XPATH, '//*[@id="headlessui-listbox-button-13"]'))
-        )
         #
 
         # End Backtest
