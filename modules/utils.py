@@ -39,7 +39,7 @@ def generate_times(start_time_str, end_time_str, step_minutes=3):
     times = []
     current_time = start_time
     while current_time <= end_time:
-        times.append(current_time.strftime("%H:%M"))
+        times.append(current_time.strftime("%H:%M%p"))
         current_time += timedelta(minutes=step_minutes)
 
     return times
