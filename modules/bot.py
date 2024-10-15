@@ -136,6 +136,20 @@ class Bot:
 
         # Re-Enter Trades After Exit
 
+        # Use CSV Custom Signals File
+        time.sleep(1)
+        toggles[23].click()
+        time.sleep(1)
+        new_backtest_form = self.wait.until(EC.element_to_be_clickable((By.TAG_NAME, 'form')))
+        toggles = new_backtest_form.find_elements(By.CSS_SELECTOR, 'button.toggle')
+        toggles[15].click()
+
+
+        input_file = self.wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, 'input[type=file]')))
+        input_file.send_keys(params['file'])
+
+        time.sleep(2)
+
         #
 
         inputs = new_backtest_form.find_elements(By.TAG_NAME, 'input')
@@ -199,6 +213,7 @@ class Bot:
         # Strategy
         select_inputs[1].click()
         select_inputs[1].send_keys(Keys.ARROW_DOWN)
+        select_inputs[1].send_keys(Keys.ARROW_DOWN)
         time.sleep(2)
         self.browser.find_element(By.CSS_SELECTOR, 'ul[role=listbox]').send_keys(Keys.ENTER)
         time.sleep(2)
@@ -220,27 +235,24 @@ class Bot:
 
         #
 
-        add_entry_time_button = self.wait.until(
-            EC.element_to_be_clickable((By.XPATH, "//button[text()=' Add Entry Time ']"))
-        )
 
-        times = generate_times('9:32', '15:59')
-        default_entry_time_input = self.browser.find_element(By.CSS_SELECTOR, 'input[type=time]')
-        default_entry_time_input.send_keys(times[0])
-
-        print(len(times)) # 130
-
-        for i in range(1, 19):
-            add_entry_time_button.click()
-            entry_time_inputs = self.browser.find_elements(By.CSS_SELECTOR, f'input[type=time]')
-            entry_time_inputs[i].send_keys(times[i])
-
-        time.sleep(2)
+        # add_entry_time_button = self.wait.until(
+        #     EC.element_to_be_clickable((By.XPATH, "//button[text()=' Add Entry Time ']"))
+        # )
+        #
+        # times = generate_times('9:32', '15:59')
+        # default_entry_time_input = self.browser.find_element(By.CSS_SELECTOR, 'input[type=time]')
+        # default_entry_time_input.send_keys(times[0])
+        #
+        # for i in range(1, 19):
+        #     add_entry_time_button.click()
+        #     entry_time_inputs = self.browser.find_elements(By.CSS_SELECTOR, f'input[type=time]')
+        #     entry_time_inputs[i].send_keys(times[i])
 
         submit_button = self.wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, 'button[type=submit]')))
         submit_button.click()
 
-        time.sleep(30)
+        time.sleep(60*10)
 
         # Get result
         labels = self.browser.find_elements(By.CSS_SELECTOR, 'dl > div > dt')
