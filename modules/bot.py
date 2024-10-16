@@ -137,9 +137,9 @@ class Bot:
         # Re-Enter Trades After Exit
 
         # Use CSV Custom Signals File
-        time.sleep(1)
+        time.sleep(2)
         toggles[23].click()
-        time.sleep(1)
+        time.sleep(2)
         new_backtest_form = self.wait.until(EC.element_to_be_clickable((By.TAG_NAME, 'form')))
         toggles = new_backtest_form.find_elements(By.CSS_SELECTOR, 'button.toggle')
         toggles[15].click()
@@ -252,7 +252,7 @@ class Bot:
         submit_button = self.wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, 'button[type=submit]')))
         submit_button.click()
 
-        time.sleep(60*10)
+        time.sleep(60*5)
 
         # Get result
         labels = self.browser.find_elements(By.CSS_SELECTOR, 'dl > div > dt')
@@ -268,6 +268,8 @@ class Bot:
             EC.element_to_be_clickable((By.XPATH, "//span[text()='Trade Log']"))
         )
         trade_log_button.click()
+
+        time.sleep(10)
 
         download_button = self.wait.until(
             EC.element_to_be_clickable((By.XPATH, "//span[text()='Export to CSV']"))
