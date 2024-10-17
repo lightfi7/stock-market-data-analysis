@@ -25,6 +25,8 @@ class Bot:
         # Start Login
         self.browser.get('https://optionomega.com/login')
 
+        time.sleep(2)
+
         self.browser.find_element(By.XPATH, '//*[@id="app"]/div/div[2]/div/form/div[1]/input').send_keys(username)
         self.browser.find_element(By.XPATH, '//*[@id="app"]/div/div[2]/div/form/div[2]/input').send_keys(password)
         self.browser.find_element(By.XPATH, '//*[@id="app"]/div/div[2]/div/form/div[4]/button').click()
@@ -252,7 +254,7 @@ class Bot:
         submit_button = self.wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, 'button[type=submit]')))
         submit_button.click()
 
-        time.sleep(60*5)
+        time.sleep(60*3) # Waiting 3mins to get data
 
         # Get result
         labels = self.browser.find_elements(By.CSS_SELECTOR, 'dl > div > dt')
@@ -269,11 +271,12 @@ class Bot:
         )
         trade_log_button.click()
 
-        time.sleep(10)
+        time.sleep(30)
 
         download_button = self.wait.until(
             EC.element_to_be_clickable((By.XPATH, "//span[text()='Export to CSV']"))
         )
+        download_button.click()
         download_button.click()
         #
 
