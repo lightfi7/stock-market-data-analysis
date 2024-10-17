@@ -249,10 +249,12 @@ class Bot:
         #     entry_time_inputs = self.browser.find_elements(By.CSS_SELECTOR, f'input[type=time]')
         #     entry_time_inputs[i].send_keys(times[i])
 
+        time.sleep(60)
+
         submit_button = self.wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, 'button[type=submit]')))
         submit_button.click()
 
-        time.sleep(60*5)
+        time.sleep(60*3)
 
         # Get result
         labels = self.browser.find_elements(By.CSS_SELECTOR, 'dl > div > dt')
@@ -274,6 +276,8 @@ class Bot:
         download_button = self.wait.until(
             EC.element_to_be_clickable((By.XPATH, "//span[text()='Export to CSV']"))
         )
+        print(download_button.text)
+        download_button.click()
         download_button.click()
         #
 
