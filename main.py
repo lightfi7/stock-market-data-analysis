@@ -3,13 +3,13 @@ import matplotlib.table as table
 import pandas as pd
 from dotenv import load_dotenv
 from matplotlib.colors import LinearSegmentedColormap
+load_dotenv()
 
 from modules.bot import Bot
 from modules.core import analyze
 from modules.dialog import run_window
 from modules.utils import get_date_range, get_mondays, generate_times, calculate_offset
 
-load_dotenv()
 
 def start(start_date, end_date):
 
@@ -38,7 +38,7 @@ def start(start_date, end_date):
         'file':'C:/Users/Fi/Documents/GitHub/stock-market-data-analysis/output.csv'
     })
 
-    rows = analyze('C:/Users/Fi/Downloads/trade-log.csv')
+    rows = analyze('C:/Users/Administrator/Downloads/trade-log.csv')
     data = pd.DataFrame(rows, columns=['Time', 'Starting Capital', 'Ending Capital', 'Profit/Loss (P/L)', 'CAGR',
                                        'Max Drawdown', 'MAR Ratio'])
 
