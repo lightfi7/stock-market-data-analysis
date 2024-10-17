@@ -4,6 +4,7 @@ import pandas as pd
 from dotenv import load_dotenv
 from matplotlib.colors import LinearSegmentedColormap
 
+from modules.bot import Bot
 from modules.core import analyze
 from modules.dialog import run_window
 from modules.utils import get_date_range, get_mondays, generate_times, calculate_offset
@@ -31,11 +32,11 @@ def start(start_date, end_date):
     df = df.iloc[1:]
     df.to_csv('output.csv', index=False)
 
-    # bot = modules.bot.Bot()
-    # bot.start()
-    # bot.run({
-    #     'file':'C:/Users/Fi/Documents/GitHub/stock-market-data-analysis/output.csv'
-    # })
+    bot = Bot()
+    bot.start()
+    bot.run({
+        'file':'C:/Users/Fi/Documents/GitHub/stock-market-data-analysis/output.csv'
+    })
 
     rows = analyze('C:/Users/Fi/Downloads/trade-log.csv')
     data = pd.DataFrame(rows, columns=['Time', 'Starting Capital', 'Ending Capital', 'Profit/Loss (P/L)', 'CAGR',
