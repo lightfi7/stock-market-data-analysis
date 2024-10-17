@@ -5,14 +5,15 @@ from dotenv import load_dotenv
 from matplotlib.colors import LinearSegmentedColormap
 
 from modules.core import analyze
+from modules.dialog import run_window
 from modules.utils import get_date_range, get_mondays, generate_times, calculate_offset
 
 load_dotenv()
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    start_date = "2017-01-01"
-    end_date = "2017-12-31"
+def start(start_date, end_date):
+
+    # start_date = "2017-01-01"
+    # end_date = "2017-12-31"
     dates = get_date_range(start_date, end_date)
     mondays = get_mondays(start_date, end_date)
 
@@ -60,7 +61,7 @@ if __name__ == '__main__':
     # filter best...
     sorted_rows = sorted(rows, key=lambda x: x[3])
 
-    table = table.table(cellText=sorted_rows[-1:],
+    tb = table.table(cellText=sorted_rows[-1:],
                         colLabels=['Time', 'Starting Capital', 'Ending Capital', 'Profit/Loss (P/L)', 'CAGR',
                                    'Max Drawdown', 'MAR Ratio'],
                         ax=ax2,
@@ -69,7 +70,7 @@ if __name__ == '__main__':
                         )
     ax2.axis('off')
     ax2.set_title('Optimal Entries by Day', loc='center')
-    ax2.add_table(table)
+    ax2.add_table(tb)
 
     portfolio_values = []
     time_series = []
@@ -86,4 +87,9 @@ if __name__ == '__main__':
     ax3.set_ylabel('Portfolio Value')
 
     plt.show()
+
+# Press the green button in the gutter to run the script.
+if __name__ == '__main__':
+    run_window(cb=start)
+
 
