@@ -45,6 +45,13 @@ def generate_times(start_time_str, end_time_str, step_minutes=3):
     return times
 
 
+def calculate_offset(time1_str, time2_str):
+    time1 = datetime.strptime(time1_str, "%H:%M:%S")
+    time2 = datetime.strptime(time2_str, "%H:%M:%S")
+    offset = (time2 - time1).total_seconds() / 60
+    return offset
+
+
 def write_to_csv(file_name, mondays, times):
     with open(file_name, mode='w', newline='') as file:
         writer = csv.writer(file)

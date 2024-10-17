@@ -1,15 +1,13 @@
-from dotenv import load_dotenv
-import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib.table as table
-import numpy as np
+import pandas as pd
+from dotenv import load_dotenv
+from matplotlib.colors import LinearSegmentedColormap
 
 from modules.core import analyze
-from modules.utils import get_date_range, get_mondays, generate_times
+from modules.utils import get_date_range, get_mondays, generate_times, calculate_offset
 
 load_dotenv()
-
-import modules.bot
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
@@ -32,36 +30,60 @@ if __name__ == '__main__':
     df = df.iloc[1:]
     df.to_csv('output.csv', index=False)
 
-    bot = modules.bot.Bot()
-    bot.start()
-    bot.run({
-        'file':'C:/Users/Fi/Documents/GitHub/stock-market-data-analysis/output.csv'
-    })
+    # bot = modules.bot.Bot()
+    # bot.start()
+    # bot.run({
+    #     'file':'C:/Users/Fi/Documents/GitHub/stock-market-data-analysis/output.csv'
+    # })
 
     rows = analyze('C:/Users/Fi/Downloads/trade-log.csv')
-    data = pd.DataFrame(rows, columns=['Group', 'Starting Capital', 'Ending Capital', 'Profit/Loss (P/L)', 'CAGR',
+    data = pd.DataFrame(rows, columns=['Time', 'Starting Capital', 'Ending Capital', 'Profit/Loss (P/L)', 'CAGR',
                                        'Max Drawdown', 'MAR Ratio'])
 
-    cmap = plt.get_cmap('viridis')
-    fig, ax = plt.subplots(figsize=(100, 60))
-    ax.axis('off')
+    # Define a colormap from green (positive P/L) to red (negative P/L)
+    cmap = LinearSegmentedColormap.from_list("green_red", ["red", "yellow", "green"])
 
-    colors = [cmap(i) for i in np.linspace(0, 1, len(data))]
+    # Normalize the 'P/L' values to a range from 0 to 1
+    norm = plt.Normalize(data['Profit/Loss (P/L)'].min(), data['Profit/Loss (P/L)'].max())
 
-    ax = fig.add_axes([0.2, 0.4, 0.6, 0.4])
-    ax.bar(data['Group'], data['CAGR'] * 100, color=colors, alpha=0.8, align='center')
-    ax.set_xlabel('Group')
-    ax.set_ylabel('CAGR (%)')
-    ax.set_title('CAGR Bar Chart with Color Based on CAGR')
+    # Apply the colormap to 'P/L' values
+    colors = cmap(norm(data['Profit/Loss (P/L)']))
 
-    ax2 = fig.add_axes([0.2, 0.3, 0.6, 0.3])
-    table = table.table(cellText=rows,
-                        colLabels=['Group', 'Starting Capital', 'Ending Capital', 'Profit/Loss (P/L)', 'CAGR',
+    fig, (ax1, ax2, ax3) = plt.subplots(3, 1, figsize=(19.2, 10.8), constrained_layout=True)
+
+    ax1.bar(data['Time'], data['CAGR'] * 100, color=colors, alpha=0.8, align='center')
+    ax1.set_xlabel('Time')
+    ax1.set_ylabel('CAGR (%)')
+    ax1.set_title('CAGR Bar Chart with Color Based on CAGR')
+    ax1.set_xticklabels(data['Time'], rotation=90, ha='left', fontsize=8)
+
+    # filter best...
+    sorted_rows = sorted(rows, key=lambda x: x[3])
+
+    table = table.table(cellText=sorted_rows[-1:],
+                        colLabels=['Time', 'Starting Capital', 'Ending Capital', 'Profit/Loss (P/L)', 'CAGR',
                                    'Max Drawdown', 'MAR Ratio'],
                         ax=ax2,
+                        loc='center',
                         cellLoc='center'
                         )
-
     ax2.axis('off')
+    ax2.set_title('Optimal Entries by Day', loc='center')
     ax2.add_table(table)
+
+    portfolio_values = []
+    time_series = []
+    for row in rows:
+        portfolio_values.append(row[2])
+        time_series.append(calculate_offset(rows[0][0], row[0]))
+
+    print(time_series)
+    print(portfolio_values)
+
+    ax3.plot(time_series, portfolio_values)
+    ax3.set_title('Portfolio Value Over Time')
+    ax3.set_xlabel('Time')
+    ax3.set_ylabel('Portfolio Value')
+
     plt.show()
+
