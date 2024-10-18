@@ -35,7 +35,9 @@ def start(start_date, end_date):
     bot = Bot()
     bot.start()
     bot.run({
-        'file':'C:/Users/Fi/Documents/GitHub/stock-market-data-analysis/output.csv'
+        'start_date': start_date,
+        'end_date': end_date,
+        'file':'C:/Users/Administrator/Documents/GitHub/stock-market-data-analysis/output.csv'
     })
 
     rows = analyze('C:/Users/Administrator/Downloads/trade-log.csv')

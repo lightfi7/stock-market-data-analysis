@@ -160,11 +160,11 @@ class Bot:
         #     time.sleep(5)
 
         # Start Date
-
+        inputs[0].send_keys(params['start_date'])
         #
 
         # End Date
-
+        inputs[1].send_keys(params['end_date'])
         #
 
         # Strikes
