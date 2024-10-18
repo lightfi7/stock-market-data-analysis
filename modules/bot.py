@@ -40,10 +40,10 @@ class Bot:
             EC.element_to_be_clickable((By.XPATH, '//*[@id="app"]/div/div[2]/div/div/div[1]/div/div[2]/button')))
         new_backtest_button.click()
 
+        time.sleep(5)
         #
 
         new_backtest_form = self.wait.until(EC.element_to_be_clickable((By.TAG_NAME, 'form')))
-
         ###
 
         toggles = new_backtest_form.find_elements(By.CSS_SELECTOR, 'button.toggle')
@@ -251,8 +251,6 @@ class Bot:
         #     entry_time_inputs = self.browser.find_elements(By.CSS_SELECTOR, f'input[type=time]')
         #     entry_time_inputs[i].send_keys(times[i])
 
-        time.sleep(60)
-
         submit_button = self.wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, 'button[type=submit]')))
         submit_button.click()
 
@@ -273,11 +271,10 @@ class Bot:
         )
         trade_log_button.click()
 
-        time.sleep(30)
+        time.sleep(2)
 
-        download_button = self.wait.until(
-            EC.element_to_be_clickable((By.XPATH, "//span[text()='Export to CSV']"))
-        )
+        download_button = self.browser.find_element(By.XPATH, "//span[text()='Export to CSV']")
+
         print(download_button.text)
         download_button.click()
         download_button.click()
