@@ -256,7 +256,7 @@ class Bot:
         submit_button = self.wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, 'button[type=submit]')))
         submit_button.click()
 
-        time.sleep(60*3) # Waiting 3mins to get data
+        time.sleep(60*2) # Waiting 3mins to get data
 
         # Get result
         labels = self.browser.find_elements(By.CSS_SELECTOR, 'dl > div > dt')
@@ -266,21 +266,19 @@ class Bot:
             print(label.text, value.text)
         #
 
+
         # Download
-        trade_log_button = self.wait.until(
-            EC.element_to_be_clickable((By.XPATH, "//a[text()=' Trade Log']"))
+        trade_log_button = self.browser.execute_script(
+            "return [...document.querySelectorAll('a')].find(e => e.textContent.includes('Trade Log'));"
         )
         trade_log_button.click()
 
-        time.sleep(2)
+        time.sleep(10)
 
-        download_button = self.wait.until(
-            EC.element_to_be_clickable((By.XPATH, "//a[text()=' Export to CSV']"))
+        download_button = self.browser.execute_script(
+            "return [...document.querySelectorAll('div')].find(e => e.textContent.includes('Export to CSV'));"
         )
-
-        print(download_button.text)
-        download_button.click()
-        download_button.click()
+        print()
         download_button.click()
         #
 
