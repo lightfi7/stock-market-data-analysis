@@ -2,6 +2,7 @@ import os
 import time
 
 from selenium import webdriver
+from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -20,6 +21,7 @@ class Bot:
     def __init__(self):
         self.browser = webdriver.Chrome()
         self.wait = WebDriverWait(self.browser, 30)
+        self.actions = ActionChains(self.browser)
 
     def start(self):
         # Start Login
@@ -259,21 +261,22 @@ class Bot:
         # Get result
         labels = self.browser.find_elements(By.CSS_SELECTOR, 'dl > div > dt')
         values = self.browser.find_elements(By.CSS_SELECTOR, 'dl > div > dd')
-        print(len(labels))
-        print(len(values))
+
         for label, value in zip(labels, values):
             print(label.text, value.text)
         #
 
         # Download
         trade_log_button = self.wait.until(
-            EC.element_to_be_clickable((By.XPATH, "//span[text()='Trade Log']"))
+            EC.element_to_be_clickable((By.XPATH, "//a[text()=' Trade Log']"))
         )
         trade_log_button.click()
 
         time.sleep(2)
 
-        download_button = self.browser.find_element(By.XPATH, "//span[text()='Export to CSV']")
+        download_button = self.wait.until(
+            EC.element_to_be_clickable((By.XPATH, "//a[text()=' Export to CSV']"))
+        )
 
         print(download_button.text)
         download_button.click()

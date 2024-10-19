@@ -37,10 +37,10 @@ def start(start_date, end_date):
     bot.run({
         'start_date': start_date,
         'end_date': end_date,
-        'file':'C:/Users/Administrator/Documents/GitHub/stock-market-data-analysis/output.csv'
+        'file':'C:/Users/Fi/Documents/GitHub/stock-market-data-analysis/output.csv'
     })
 
-    rows = analyze('C:/Users/Administrator/Downloads/trade-log.csv')
+    rows = analyze('C:/Users/Fi/Downloads/trade-log.csv')
     data = pd.DataFrame(rows, columns=['Time', 'Starting Capital', 'Ending Capital', 'Profit/Loss (P/L)', 'CAGR',
                                        'Max Drawdown', 'MAR Ratio'])
 

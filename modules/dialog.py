@@ -1,6 +1,8 @@
 import tkinter as tk
 from tkinter import ttk
 
+from fontTools.ttx import process
+
 
 def run_window(cb):
     def submit_action():
@@ -16,6 +18,7 @@ def run_window(cb):
     def on_close():
         dialog.destroy()  # Close the dialog
         root.quit()  # Exit the application
+        exit(0)
 
     # Create the main window
     root = tk.Tk()
@@ -40,6 +43,7 @@ def run_window(cb):
     label_start.grid(row=0, column=0, padx=20, pady=10, sticky='w')
 
     start_entry = ttk.Entry(dialog, font=entry_font, width=30)
+    start_entry.insert(0, "2017-01-01")
     start_entry.grid(row=0, column=1, padx=20, pady=10)
 
     # Create a label and entry for the end date
@@ -47,6 +51,7 @@ def run_window(cb):
     label_end.grid(row=1, column=0, padx=20, pady=10, sticky='w')
 
     end_entry = ttk.Entry(dialog, font=entry_font, width=30)
+    end_entry.insert(0, "2017-12-31")
     end_entry.grid(row=1, column=1, padx=20, pady=10)
 
     # Create a submit button
