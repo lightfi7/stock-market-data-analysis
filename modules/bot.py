@@ -269,7 +269,7 @@ class Bot:
         #
 
         # Strategy
-        
+
         #
 
         # Delta
