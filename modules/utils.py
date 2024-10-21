@@ -16,12 +16,12 @@ def get_date_range(start_date, end_date):
     return date_list
 
 
-def get_mondays(start_date, end_date):
+def get_days(start_date, end_date, day):
 
     start_date = datetime.strptime(start_date, "%Y-%m-%d")
     end_date = datetime.strptime(end_date, "%Y-%m-%d")
 
-    while start_date.weekday() != 0:  # Monday is 0 in weekday()
+    while start_date.weekday() != day:  # Monday is 0 in weekday()
         start_date += timedelta(days=1)
 
     mondays = []

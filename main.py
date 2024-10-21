@@ -10,13 +10,13 @@ load_dotenv()
 from modules.bot import Bot
 from modules.core import analyze
 from modules.dialog import run_window
-from modules.utils import get_date_range, get_mondays, generate_times, calculate_offset
+from modules.utils import get_date_range, get_days, generate_times, calculate_offset
 
-def ready(start_date, end_date):
+def ready(start_date, end_date, day):
     # start_date = "2017-01-01"
     # end_date = "2017-12-31"
     dates = get_date_range(start_date, end_date)
-    mondays = get_mondays(start_date, end_date)
+    mondays = get_days(start_date, end_date, day)
 
     times = generate_times('9:32', '15:59')
 
