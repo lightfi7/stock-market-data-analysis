@@ -4,7 +4,16 @@ from tkinter import ttk
 from fontTools.ttx import process
 
 
-def run_window(cb):
+def run_window(cb_ready, cb):
+    def ready_action():
+        start_date = start_entry.get()
+        end_date = end_entry.get()
+        print(f"Start Date: {start_date}")
+        print(f"End Date: {end_date}")
+        if cb_ready:
+            cb_ready(start_date, end_date)
+        pass
+
     def submit_action():
         start_date = start_entry.get()
         end_date = end_entry.get()
@@ -55,8 +64,12 @@ def run_window(cb):
     end_entry.grid(row=1, column=1, padx=20, pady=10)
 
     # Create a submit button
+    ready_button = ttk.Button(dialog, text="Ready", command=ready_action)
+    ready_button.grid(row=2, column=0, columnspan=2, pady=10)
+
+    # Create a submit button
     submit_button = ttk.Button(dialog, text="Submit", command=submit_action)
-    submit_button.grid(row=2, column=0, columnspan=2, pady=20)
+    submit_button.grid(row=3, column=0, columnspan=2, pady=10)
 
     # Configure grid weights for better spacing
     dialog.grid_columnconfigure(0, weight=1)

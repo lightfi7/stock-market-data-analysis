@@ -12,9 +12,7 @@ from modules.core import analyze
 from modules.dialog import run_window
 from modules.utils import get_date_range, get_mondays, generate_times, calculate_offset
 
-
-def start(start_date, end_date):
-
+def ready(start_date, end_date):
     # start_date = "2017-01-01"
     # end_date = "2017-12-31"
     dates = get_date_range(start_date, end_date)
@@ -27,12 +25,14 @@ def start(start_date, end_date):
 
     for date in dates:
         for time in times:
-            rows.append((last, f'{date} {time}'))
+            rows.append((last, f'{date} {time}', None, None, None, None, None))
             last = f'{date} {time}'
 
-    df = pd.DataFrame(rows, columns=['OPEN_DATETIME', 'CLOSE_DATETIME'])
+    df = pd.DataFrame(rows, columns=['OPEN_DATETIME', 'CLOSE_DATETIME','BUY_SELL','CALL_PUT','STRIKE','EXPIRATION','QUANTITY'])
     df = df.iloc[1:]
     df.to_csv('output.csv', index=False)
+
+def start(start_date, end_date):
 
     bot = Bot()
     bot.start()
@@ -95,6 +95,6 @@ def start(start_date, end_date):
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    run_window(cb=start)
+    run_window(cb_ready=ready, cb=start)
 
 
