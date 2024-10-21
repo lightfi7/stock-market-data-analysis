@@ -42,7 +42,7 @@ def start(start_date, end_date):
         'file':f'{os.path.expanduser("~")}/OneDrive/Documents/GitHub/stock-market-data-analysis/output.csv'
     })
 
-    rows = analyze(f'{os.path.expanduser("~")}/OneDrive/Downloads/trade-log.csv')
+    rows = analyze(f'{os.path.expanduser("~")}/Downloads/trade-log.csv')
     data = pd.DataFrame(rows, columns=['Time', 'Starting Capital', 'Ending Capital', 'Profit/Loss (P/L)', 'CAGR',
                                        'Max Drawdown', 'MAR Ratio'])
 
