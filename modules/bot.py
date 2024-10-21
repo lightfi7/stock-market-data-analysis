@@ -300,8 +300,8 @@ class Bot:
             inputs[2].send_keys(Keys.CONTROL + 'A')
             inputs[2].send_keys(leg_options[i]['dte'])
 
-        print(table.text)
 
+        time.sleep(60*5)
 
         submit_button = self.wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, 'button[type=submit]')))
         submit_button.click()
