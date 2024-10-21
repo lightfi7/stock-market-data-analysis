@@ -15,8 +15,8 @@ from modules.utils import get_date_range, get_days, generate_times, calculate_of
 def ready(start_date, end_date, day):
     # start_date = "2017-01-01"
     # end_date = "2017-12-31"
-    dates = get_date_range(start_date, end_date)
-    mondays = get_days(start_date, end_date, day)
+    # dates = get_date_range(start_date, end_date)
+    dates = get_days(start_date, end_date, int(day))
 
     times = generate_times('9:32', '15:59')
 
