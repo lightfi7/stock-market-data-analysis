@@ -258,6 +258,8 @@ class Bot:
 
         time.sleep(60*2) # Waiting 3mins to get data
 
+        self.browser.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+
         # Get result
         labels = self.browser.find_elements(By.CSS_SELECTOR, 'dl > div > dt')
         values = self.browser.find_elements(By.CSS_SELECTOR, 'dl > div > dd')
@@ -266,22 +268,24 @@ class Bot:
             print(label.text, value.text)
         #
 
+        self.browser.execute_script("window.scrollTo(0, document.body.scrollHeight);")
 
         # Download
         trade_log_button = self.browser.execute_script(
-            "return [...document.querySelectorAll('a')].find(e => e.textContent.includes('Trade Log'));"
+            "return [...document.querySelectorAll('span')].find(e => e.textContent.includes('Trade Log'));"
         )
+        print(trade_log_button.text)
         trade_log_button.click()
 
-        time.sleep(10)
-
         download_button = self.browser.execute_script(
-            "return [...document.querySelectorAll('div')].find(e => e.textContent.includes('Export to CSV'));"
+            "return [...document.querySelectorAll('.has-tooltip')].find(e => e.textContent.includes('Export to CSV'));"
         )
-        print()
+        print(download_button.text)
         download_button.click()
+
         #
 
+        time.sleep(5)
         # End Backtest
 
 # Close the WebDriver

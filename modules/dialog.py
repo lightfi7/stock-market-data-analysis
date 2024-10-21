@@ -51,7 +51,7 @@ def run_window(cb):
     label_end.grid(row=1, column=0, padx=20, pady=10, sticky='w')
 
     end_entry = ttk.Entry(dialog, font=entry_font, width=30)
-    end_entry.insert(0, "2017-12-31")
+    end_entry.insert(0, "2017-04-30")
     end_entry.grid(row=1, column=1, padx=20, pady=10)
 
     # Create a submit button
