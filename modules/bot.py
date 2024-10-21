@@ -48,6 +48,12 @@ class Bot:
         new_backtest_form = self.wait.until(EC.element_to_be_clickable((By.TAG_NAME, 'form')))
         ###
 
+        add_leg_button = new_backtest_button.find_element(By.XPATH, "//button[text()='Add Leg']")
+        add_leg_button.click()
+        add_leg_button.click()
+        add_leg_button.click()
+        add_leg_button.click()
+
         toggles = new_backtest_form.find_elements(By.CSS_SELECTOR, 'button.toggle')
 
         # Round Strikes to Nearest
