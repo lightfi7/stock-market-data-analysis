@@ -269,12 +269,7 @@ class Bot:
         #
 
         # Strategy
-        select_inputs[1].click()
-        select_inputs[1].send_keys(Keys.ARROW_DOWN)
-        select_inputs[1].send_keys(Keys.ARROW_DOWN)
-        time.sleep(2)
-        self.browser.find_element(By.CSS_SELECTOR, 'ul[role=listbox]').send_keys(Keys.ENTER)
-        time.sleep(2)
+        
         #
 
         # Delta
