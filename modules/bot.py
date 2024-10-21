@@ -48,11 +48,58 @@ class Bot:
         new_backtest_form = self.wait.until(EC.element_to_be_clickable((By.TAG_NAME, 'form')))
         ###
 
+        leg_options = [
+            {
+                "opt": ["Sell", "Put"],
+                "qty": 1,
+                "v": 25,
+                "dte": 6,
+            },
+            {
+                "opt": ["Buy", "Put"],
+                "qty": 1,
+                "v": 0,
+                "dte": 7,
+            },
+            {
+                "opt": ["Sell", "Call"],
+                "qty": 1,
+                "v": 25,
+                "dte": 6,
+            },
+            {
+                "opt": ["Buy", "Call"],
+                "qty": 1,
+                "v": 0,
+                "dte": 7,
+            }
+        ]
+
+
         add_leg_button = new_backtest_button.find_element(By.XPATH, "//button[text()='Add Leg']")
         add_leg_button.click()
         add_leg_button.click()
 
-        table = new_backtest_button.find_element(By.XPATH, "/div/table")
+        table = new_backtest_button.find_element(By.XPATH, "//div/table")
+        rows = table.find_elements(By.TAG_NAME, "td")
+        for row in rows:
+            buttons = row.find_elements(By.TAG_NAME, "button")
+            buttons[5].click()
+
+        rows = table.find_elements(By.TAG_NAME, "td")
+        for i in range(len(rows)):
+            row = rows[i]
+            for opt in leg_options[i]['opt']:
+                button = row.find_element(By.XPATH, f".//button[text()=' {opt} ']")
+                button.click()
+            inputs = row.find_elements(By.TAG_NAME, "input")
+            inputs[0].send_keys(Keys.CONTROL+'A')
+            inputs[0].send_keys(leg_options[i]['qty'])
+            inputs[1].send_keys(Keys.CONTROL+'A')
+            inputs[1].send_keys(leg_options[i]['v'])
+            inputs[2].send_keys(Keys.CONTROL+'A')
+            inputs[2].send_keys(leg_options[i]['dte'])
+
         print(table.text)
 
         toggles = new_backtest_form.find_elements(By.CSS_SELECTOR, 'button.toggle')
@@ -222,12 +269,7 @@ class Bot:
         #
 
         # Strategy
-        select_inputs[1].click()
-        select_inputs[1].send_keys(Keys.ARROW_DOWN)
-        select_inputs[1].send_keys(Keys.ARROW_DOWN)
-        time.sleep(2)
-        self.browser.find_element(By.CSS_SELECTOR, 'ul[role=listbox]').send_keys(Keys.ENTER)
-        time.sleep(2)
+        
         #
 
         # Delta
