@@ -76,32 +76,6 @@ class Bot:
         ]
 
 
-        add_leg_button = new_backtest_button.find_element(By.XPATH, "//button[text()='Add Leg']")
-        add_leg_button.click()
-        add_leg_button.click()
-
-        table = new_backtest_button.find_element(By.XPATH, "//div/table")
-        rows = table.find_elements(By.TAG_NAME, "td")
-        for row in rows:
-            buttons = row.find_elements(By.TAG_NAME, "button")
-            buttons[5].click()
-
-        rows = table.find_elements(By.TAG_NAME, "td")
-        for i in range(len(rows)):
-            row = rows[i]
-            for opt in leg_options[i]['opt']:
-                button = row.find_element(By.XPATH, f".//button[text()=' {opt} ']")
-                button.click()
-            inputs = row.find_elements(By.TAG_NAME, "input")
-            inputs[0].send_keys(Keys.CONTROL+'A')
-            inputs[0].send_keys(leg_options[i]['qty'])
-            inputs[1].send_keys(Keys.CONTROL+'A')
-            inputs[1].send_keys(leg_options[i]['v'])
-            inputs[2].send_keys(Keys.CONTROL+'A')
-            inputs[2].send_keys(leg_options[i]['dte'])
-
-        print(table.text)
-
         toggles = new_backtest_form.find_elements(By.CSS_SELECTOR, 'button.toggle')
 
         # Round Strikes to Nearest
@@ -301,6 +275,33 @@ class Bot:
         #     add_entry_time_button.click()
         #     entry_time_inputs = self.browser.find_elements(By.CSS_SELECTOR, f'input[type=time]')
         #     entry_time_inputs[i].send_keys(times[i])
+
+        add_leg_button = new_backtest_button.find_element(By.XPATH, "//button[text()='Add Leg']")
+        add_leg_button.click()
+        add_leg_button.click()
+
+        table = new_backtest_button.find_element(By.XPATH, "//div/table")
+        rows = table.find_elements(By.TAG_NAME, "td")
+        for row in rows:
+            buttons = row.find_elements(By.TAG_NAME, "button")
+            buttons[5].click()
+
+        rows = table.find_elements(By.TAG_NAME, "td")
+        for i in range(len(rows)):
+            row = rows[i]
+            for opt in leg_options[i]['opt']:
+                button = row.find_element(By.XPATH, f".//button[text()=' {opt} ']")
+                button.click()
+            inputs = row.find_elements(By.TAG_NAME, "input")
+            inputs[0].send_keys(Keys.CONTROL + 'A')
+            inputs[0].send_keys(leg_options[i]['qty'])
+            inputs[1].send_keys(Keys.CONTROL + 'A')
+            inputs[1].send_keys(leg_options[i]['v'])
+            inputs[2].send_keys(Keys.CONTROL + 'A')
+            inputs[2].send_keys(leg_options[i]['dte'])
+
+        print(table.text)
+
 
         submit_button = self.wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, 'button[type=submit]')))
         submit_button.click()
