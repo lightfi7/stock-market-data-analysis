@@ -54,6 +54,9 @@ class Bot:
         add_leg_button.click()
         add_leg_button.click()
 
+        table = new_backtest_button.find_element(By.XPATH, "/div/table")
+        print(table.text)
+
         toggles = new_backtest_form.find_elements(By.CSS_SELECTOR, 'button.toggle')
 
         # Round Strikes to Nearest
