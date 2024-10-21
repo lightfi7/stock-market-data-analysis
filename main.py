@@ -1,3 +1,5 @@
+import os
+
 import matplotlib.pyplot as plt
 import matplotlib.table as table
 import pandas as pd
@@ -37,10 +39,10 @@ def start(start_date, end_date):
     bot.run({
         'start_date': start_date,
         'end_date': end_date,
-        'file':'C:/Users/Fi/Documents/GitHub/stock-market-data-analysis/output.csv'
+        'file':f'{os.path.expanduser("~")}/Documents/GitHub/stock-market-data-analysis/output.csv'
     })
 
-    rows = analyze('C:/Users/Fi/Downloads/trade-log.csv')
+    rows = analyze(f'{os.path.expanduser("~")}/Downloads/trade-log.csv')
     data = pd.DataFrame(rows, columns=['Time', 'Starting Capital', 'Ending Capital', 'Profit/Loss (P/L)', 'CAGR',
                                        'Max Drawdown', 'MAR Ratio'])
 
