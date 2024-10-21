@@ -48,9 +48,34 @@ class Bot:
         new_backtest_form = self.wait.until(EC.element_to_be_clickable((By.TAG_NAME, 'form')))
         ###
 
+        leg_options = [
+            {
+                "opt": ["Sell", "Put"],
+                "qty": 1,
+                "v": 25,
+                "dte": 6,
+            },
+            {
+                "opt": ["Buy", "Put"],
+                "qty": 1,
+                "v": 0,
+                "dte": 7,
+            },
+            {
+                "opt": ["Sell", "Call"],
+                "qty": 1,
+                "v": 25,
+                "dte": 6,
+            },
+            {
+                "opt": ["Buy", "Call"],
+                "qty": 1,
+                "v": 0,
+                "dte": 7,
+            }
+        ]
+
         add_leg_button = new_backtest_button.find_element(By.XPATH, "//button[text()='Add Leg']")
-        add_leg_button.click()
-        add_leg_button.click()
         add_leg_button.click()
         add_leg_button.click()
 
