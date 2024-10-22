@@ -1,9 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
 
-from fontTools.ttx import process
-
-
 def run_window(cb_ready, cb):
     def ready_action():
         start_date = start_entry.get()
