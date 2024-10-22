@@ -301,7 +301,6 @@ class Bot:
             inputs[2].send_keys(Keys.CONTROL + 'A')
             inputs[2].send_keys(leg_options[i]['dte'])
 
-        alert("Waiting for manual input")
         time.sleep(60*3)
 
         submit_button = self.wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, 'button[type=submit]')))
