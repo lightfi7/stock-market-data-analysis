@@ -7,9 +7,8 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.keys import Keys
-
-from modules.dialog import alert
 from modules.utils import generate_times
+
 
 username = os.environ['OO_USERNAME']
 password = os.environ['OO_PASSWORD']
@@ -301,7 +300,7 @@ class Bot:
             inputs[2].send_keys(Keys.CONTROL + 'A')
             inputs[2].send_keys(leg_options[i]['dte'])
 
-        time.sleep(60*3)
+        time.sleep(60*2)
 
         submit_button = self.wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, 'button[type=submit]')))
         submit_button.click()
