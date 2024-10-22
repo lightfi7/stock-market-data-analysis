@@ -298,12 +298,12 @@ class Bot:
             inputs[2].send_keys(Keys.CONTROL + 'A')
             inputs[2].send_keys(leg_options[i]['dte'])
 
-        time.sleep(60*3)
+        time.sleep(60*2)
 
         submit_button = self.wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, 'button[type=submit]')))
         submit_button.click()
 
-        time.sleep(60*3) # Waiting 5 mins to get data
+        time.sleep(60*2) # Waiting 5 mins to get data
 
         self.browser.execute_script("window.scrollTo(0, document.body.scrollHeight);")
 
