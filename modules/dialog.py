@@ -1,10 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
 
-def alert(message):
-    tk.messagebox(title='Alarm', message=message)
-
-
 def run_window(cb_ready, cb):
     def ready_action():
         start_date = start_entry.get()
