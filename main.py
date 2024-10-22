@@ -30,7 +30,7 @@ def ready(start_date, end_date, day):
 
     df = pd.DataFrame(rows, columns=['OPEN_DATETIME', 'CLOSE_DATETIME','BUY_SELL','CALL_PUT','STRIKE','EXPIRATION','QUANTITY'])
     df = df.iloc[1:]
-    df.to_csv('output.csv', index=False)
+    df.to_csv(f'{os.path.dirname(os.path.abspath(__file__))}/output.csv', index=False)
 
 def start(start_date, end_date):
 
@@ -39,7 +39,7 @@ def start(start_date, end_date):
     bot.run({
         'start_date': start_date,
         'end_date': end_date,
-        'file':f'{os.path.expanduser("~")}/OneDrive/Documents/GitHub/stock-market-data-analysis/output.csv'
+        'file':f'{os.path.dirname(os.path.abspath(__file__))}/output.csv'
     })
 
     rows = analyze(f'{os.path.expanduser("~")}/Downloads/trade-log.csv')
