@@ -1,7 +1,8 @@
 import tkinter as tk
 from tkinter import ttk
 
-from fontTools.ttx import process
+def alert(message):
+    tk.messagebox(title='Alarm', message=message)
 
 
 def run_window(cb_ready, cb):
