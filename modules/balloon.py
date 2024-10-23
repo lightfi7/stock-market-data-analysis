@@ -37,9 +37,9 @@ class WindowsBalloonTip:
                          (self.hwnd, 0, NIF_INFO, win32con.WM_USER+20,
                           None, "SMDA  tooltip",title,200,msg))
         # self.show_balloon(title, msg)
-        time.sleep(10)
-        DestroyWindow(self.hwnd)
-        UnregisterClass(classAtom, hinst)
+        # time.sleep(10)
+        # DestroyWindow(self.hwnd)
+        # UnregisterClass(classAtom, hinst)
 
     def OnDestroy(self, hwnd, msg, wparam, lparam):
         nid = (self.hwnd, 0)
