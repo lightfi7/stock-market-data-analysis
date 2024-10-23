@@ -35,7 +35,7 @@ class SystemNotification:
         Shell_NotifyIcon(NIM_ADD, nid)
 
         Shell_NotifyIcon(NIM_MODIFY, (self.hwnd, 0, NIF_INFO, win32con.WM_USER + 20, hicon,
-                                      "System Notification", message, 200, title))
+                                      "System Notification", message, 500, title))
         time.sleep(10)
         DestroyWindow(self.hwnd)
         UnregisterClass(class_atom, hinst)
