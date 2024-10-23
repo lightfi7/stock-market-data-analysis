@@ -7,6 +7,8 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.keys import Keys
+
+from modules.balloon import show_notification
 from modules.utils import generate_times
 
 
@@ -34,307 +36,328 @@ class Bot:
         self.browser.find_element(By.XPATH, '//*[@id="app"]/div/div[2]/div/form/div[4]/button').click()
         # End Login
 
+        show_notification('SMDA', 'Login success')
         time.sleep(5)
 
     def run(self, params):
-        # Start Backtest
-        new_backtest_button = self.wait.until(
-            EC.element_to_be_clickable((By.XPATH, '//*[@id="app"]/div/div[2]/div/div/div[1]/div/div[2]/button')))
-        new_backtest_button.click()
+        try:
+            # Start Backtest
+            new_backtest_button = self.wait.until(
+                EC.element_to_be_clickable((By.XPATH, '//*[@id="app"]/div/div[2]/div/div/div[1]/div/div[2]/button')))
+            new_backtest_button.click()
 
-        time.sleep(5)
-        #
+            time.sleep(5)
+            #
 
-        new_backtest_form = self.wait.until(EC.element_to_be_clickable((By.TAG_NAME, 'form')))
-        ###
+            new_backtest_form = self.wait.until(EC.element_to_be_clickable((By.TAG_NAME, 'form')))
+            ###
 
-        leg_options = [
-            {
-                "opt": ["Sell", "Put"],
-                "qty": 1,
-                "v": 25,
-                "dte": 6,
-            },
-            {
-                "opt": ["Buy", "Put"],
-                "qty": 1,
-                "v": 0,
-                "dte": 7,
-            },
-            {
-                "opt": ["Sell", "Call"],
-                "qty": 1,
-                "v": 25,
-                "dte": 6,
-            },
-            {
-                "opt": ["Buy", "Call"],
-                "qty": 1,
-                "v": 0,
-                "dte": 7,
-            }
-        ]
+            leg_options = [
+                {
+                    "opt": ["Sell", "Put"],
+                    "qty": 1,
+                    "v": 25,
+                    "dte": 6,
+                },
+                {
+                    "opt": ["Buy", "Put"],
+                    "qty": 1,
+                    "v": 0,
+                    "dte": 7,
+                },
+                {
+                    "opt": ["Sell", "Call"],
+                    "qty": 1,
+                    "v": 25,
+                    "dte": 6,
+                },
+                {
+                    "opt": ["Buy", "Call"],
+                    "qty": 1,
+                    "v": 0,
+                    "dte": 7,
+                }
+            ]
 
 
-        toggles = new_backtest_form.find_elements(By.CSS_SELECTOR, 'button.toggle')
+            toggles = new_backtest_form.find_elements(By.CSS_SELECTOR, 'button.toggle')
 
-        # Round Strikes to Nearest
+            # Round Strikes to Nearest
 
-        #
+            #
 
-        # Prune Oldest Trades
+            # Prune Oldest Trades
 
-        #
+            #
 
-        # Ignore Margin Requirements
+            # Ignore Margin Requirements
 
-        #
+            #
 
-        # Use Floating Entry Time
+            # Use Floating Entry Time
 
-        #
+            #
 
-        # Use VIX
+            # Use VIX
 
-        #
+            #
 
-        # Use Technical Indicators
+            # Use Technical Indicators
 
-        #
+            #
 
-        # Use Gaps
+            # Use Gaps
 
-        #
+            #
 
-        # Use Intraday Movement
+            # Use Intraday Movement
 
-        #
+            #
 
-        # Use SqueezeMetrics™ (Gamma / Dark Pool) Indicators
+            # Use SqueezeMetrics™ (Gamma / Dark Pool) Indicators
 
-        #
+            #
 
-        # Use Opening Range Breakout
+            # Use Opening Range Breakout
 
-        #
+            #
 
-        # Use Profit Actions
+            # Use Profit Actions
 
-        #
+            #
 
-        # Use Early Exit
+            # Use Early Exit
 
-        #
+            #
 
-        # Use VIX
+            # Use VIX
 
-        #
+            #
 
-        # Use Technical Indicators
+            # Use Technical Indicators
 
-        #
+            #
 
-        # Use Underlying Price Movement
+            # Use Underlying Price Movement
 
-        #
+            #
 
-        # Use Delta
+            # Use Delta
 
-        #
+            #
 
-        # Use Commissions & Fees
+            # Use Commissions & Fees
 
-        #
+            #
 
-        # Use Slippage
+            # Use Slippage
 
-        #
+            #
 
-        # Ignore Trades with Wide Bid-Ask Spread
+            # Ignore Trades with Wide Bid-Ask Spread
 
-        #
+            #
 
-        # Close Open Trades on Test Completion
+            # Close Open Trades on Test Completion
 
-        #
+            #
 
-        # Use Min/Max Entry Premium
+            # Use Min/Max Entry Premium
 
-        #
+            #
 
-        # Use Blackout Days
+            # Use Blackout Days
 
-        #
+            #
 
-        # Re-Enter Trades After Exit
+            # Re-Enter Trades After Exit
 
-        # Use CSV Custom Signals File
-        time.sleep(2)
-        toggles[23].click()
-        time.sleep(2)
-        new_backtest_form = self.wait.until(EC.element_to_be_clickable((By.TAG_NAME, 'form')))
-        toggles = new_backtest_form.find_elements(By.CSS_SELECTOR, 'button.toggle')
-        toggles[15].click()
+            # Use CSV Custom Signals File
+            time.sleep(2)
+            toggles[23].click()
+            time.sleep(2)
+            new_backtest_form = self.wait.until(EC.element_to_be_clickable((By.TAG_NAME, 'form')))
+            toggles = new_backtest_form.find_elements(By.CSS_SELECTOR, 'button.toggle')
+            toggles[15].click()
 
 
-        input_file = self.wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, 'input[type=file]')))
-        input_file.send_keys(params['file'])
+            input_file = self.wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, 'input[type=file]')))
+            input_file.send_keys(params['file'])
 
-        time.sleep(2)
+            time.sleep(2)
 
-        #
+            #
 
-        inputs = new_backtest_form.find_elements(By.TAG_NAME, 'input')
-        # for input_ in inputs:
-        #     input_.click()
-        #     time.sleep(5)
+            inputs = new_backtest_form.find_elements(By.TAG_NAME, 'input')
+            # for input_ in inputs:
+            #     input_.click()
+            #     time.sleep(5)
 
-        # Start Date
-        inputs[0].send_keys(params['start_date'])
-        #
+            # Start Date
+            inputs[0].send_keys(params['start_date'])
+            #
 
-        # End Date
-        inputs[1].send_keys(params['end_date'])
-        #
+            # End Date
+            inputs[1].send_keys(params['end_date'])
+            #
 
-        # Strikes
+            # Strikes
 
-        #
+            #
 
-        # Starting Funds
+            # Starting Funds
 
-        #
+            #
 
-        # Margin Allocation % Per Trade
+            # Margin Allocation % Per Trade
 
-        #
+            #
 
-        # Max Open Trades
+            # Max Open Trades
 
-        #
+            #
 
-        # Max Contracts Per Trade
-        inputs[6].send_keys('1')
-        toggles[2].click()
-        #
+            # Max Contracts Per Trade
+            inputs[6].send_keys('1')
+            toggles[2].click()
+            #
 
-        # Max Allocation Amount Per Trade
+            # Max Allocation Amount Per Trade
 
-        #
+            #
 
-        # Entry Time
+            # Entry Time
 
-        #
+            #
 
-        # Profit Target
+            # Profit Target
 
-        #
+            #
 
-        # Stop Loss
+            # Stop Loss
 
-        #
+            #
 
-        select_inputs = new_backtest_form.find_elements(By.CLASS_NAME, 'selectInput')
-        # for select_input in select_inputs:
-        #     print(select_input.text)
+            select_inputs = new_backtest_form.find_elements(By.CLASS_NAME, 'selectInput')
+            # for select_input in select_inputs:
+            #     print(select_input.text)
 
-        # Ticker
+            # Ticker
 
-        #
+            #
 
-        # Strategy
+            # Strategy
 
-        #
+            #
 
-        # Delta
+            # Delta
 
-        #
+            #
 
-        # Frequency
+            # Frequency
 
-        #
+            #
 
-        # PT
+            # PT
 
-        #
+            #
 
-        # SL
+            # SL
 
-        #
+            #
 
 
-        # add_entry_time_button = self.wait.until(
-        #     EC.element_to_be_clickable((By.XPATH, "//button[text()=' Add Entry Time ']"))
-        # )
-        #
-        # times = generate_times('9:32', '15:59')
-        # default_entry_time_input = self.browser.find_element(By.CSS_SELECTOR, 'input[type=time]')
-        # default_entry_time_input.send_keys(times[0])
-        #
-        # for i in range(1, 19):
-        #     add_entry_time_button.click()
-        #     entry_time_inputs = self.browser.find_elements(By.CSS_SELECTOR, f'input[type=time]')
-        #     entry_time_inputs[i].send_keys(times[i])
+            # add_entry_time_button = self.wait.until(
+            #     EC.element_to_be_clickable((By.XPATH, "//button[text()=' Add Entry Time ']"))
+            # )
+            #
+            # times = generate_times('9:32', '15:59')
+            # default_entry_time_input = self.browser.find_element(By.CSS_SELECTOR, 'input[type=time]')
+            # default_entry_time_input.send_keys(times[0])
+            #
+            # for i in range(1, 19):
+            #     add_entry_time_button.click()
+            #     entry_time_inputs = self.browser.find_elements(By.CSS_SELECTOR, f'input[type=time]')
+            #     entry_time_inputs[i].send_keys(times[i])
 
-        add_leg_button = new_backtest_button.find_element(By.XPATH, "//button[text()='Add Leg']")
-        add_leg_button.click()
-        add_leg_button.click()
+            add_leg_button = new_backtest_button.find_element(By.XPATH, "//button[text()='Add Leg']")
+            add_leg_button.click()
+            add_leg_button.click()
 
-        table = new_backtest_button.find_element(By.XPATH, "//div/table")
-        rows = table.find_elements(By.TAG_NAME, "td")
-        for row in rows:
-            buttons = row.find_elements(By.TAG_NAME, "button")
-            buttons[5].click()
+            table = new_backtest_button.find_element(By.XPATH, "//div/table")
+            rows = table.find_elements(By.TAG_NAME, "td")
+            for row in rows:
+                buttons = row.find_elements(By.TAG_NAME, "button")
+                buttons[5].click()
 
-        rows = table.find_elements(By.TAG_NAME, "td")
-        for i in range(len(rows)):
-            row = rows[i]
-            for opt in leg_options[i]['opt']:
-                button = row.find_element(By.XPATH, f".//button[text()=' {opt} ']")
-                button.click()
-            inputs = row.find_elements(By.TAG_NAME, "input")
-            inputs[0].send_keys(Keys.CONTROL + 'A')
-            inputs[0].send_keys(leg_options[i]['qty'])
-            inputs[1].send_keys(Keys.CONTROL + 'A')
-            inputs[1].send_keys(leg_options[i]['v'])
-            inputs[2].send_keys(Keys.CONTROL + 'A')
-            inputs[2].send_keys(leg_options[i]['dte'])
+            rows = table.find_elements(By.TAG_NAME, "td")
+            for i in range(len(rows)):
+                row = rows[i]
+                for opt in leg_options[i]['opt']:
+                    button = row.find_element(By.XPATH, f".//button[text()=' {opt} ']")
+                    button.click()
+                inputs = row.find_elements(By.TAG_NAME, "input")
+                inputs[0].send_keys(Keys.CONTROL + 'A')
+                inputs[0].send_keys(leg_options[i]['qty'])
+                inputs[1].send_keys(Keys.CONTROL + 'A')
+                inputs[1].send_keys(leg_options[i]['v'])
+                inputs[2].send_keys(Keys.CONTROL + 'A')
+                inputs[2].send_keys(leg_options[i]['dte'])
 
-        time.sleep(60*2)
+            show_notification('SMDA', 'Waiting 2 minutes for manual setup.')
+            time.sleep(60*2)
 
-        submit_button = self.wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, 'button[type=submit]')))
-        submit_button.click()
+            submit_button = self.wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, 'button[type=submit]')))
+            submit_button.click()
 
-        time.sleep(60*2) # Waiting 5 mins to get data
+            show_notification('SMDA', 'Waiting 3 minutes for results...')
+            time.sleep(60*3) # Waiting 5 mins to get data
 
-        self.browser.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+            self.browser.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+            time.sleep(3)
+            self.browser.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+            time.sleep(3)
+            self.browser.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+            time.sleep(3)
 
-        # Get result
-        labels = self.browser.find_elements(By.CSS_SELECTOR, 'dl > div > dt')
-        values = self.browser.find_elements(By.CSS_SELECTOR, 'dl > div > dd')
+            # Get result
+            labels = self.browser.find_elements(By.CSS_SELECTOR, 'dl > div > dt')
+            values = self.browser.find_elements(By.CSS_SELECTOR, 'dl > div > dd')
 
-        for label, value in zip(labels, values):
-            print(label.text, value.text)
-        #
+            for label, value in zip(labels, values):
+                print(label.text, value.text)
+            #
 
-        self.browser.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+            self.browser.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+            time.sleep(3)
+            self.browser.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+            time.sleep(3)
+            self.browser.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+            time.sleep(3)
 
-        # Download
-        trade_log_button = self.browser.execute_script(
-            "return [...document.querySelectorAll('span')].find(e => e.textContent.includes('Trade Log'));"
-        )
-        print(trade_log_button.text)
-        trade_log_button.click()
+            # Download
+            trade_log_button = self.browser.execute_script(
+                "return [...document.querySelectorAll('span')].find(e => e.textContent.includes('Trade Log'));"
+            )
+            print(trade_log_button.text)
+            trade_log_button.click()
 
-        download_button = self.browser.execute_script(
-            "return [...document.querySelectorAll('.has-tooltip')].find(e => e.textContent.includes('Export to CSV'));"
-        )
-        print(download_button.text)
-        download_button.click()
+            time.sleep(10)
 
-        #
+            download_button = self.browser.execute_script(
+                "return [...document.querySelectorAll('.has-tooltip')].find(e => e.textContent.includes('Export to CSV'));"
+            )
+            print(download_button.text)
+            download_button.click()
 
-        time.sleep(5)
+            #
+            show_notification('SMDA', 'Downloading the results...')
+
+            time.sleep(5)
+        except Exception as e:
+            show_notification("Error", e.message)
+
+
         # End Backtest
 
 # Close the WebDriver
