@@ -31,11 +31,11 @@ class WindowsBalloonTip:
         except:
           hicon = LoadIcon(0, win32con.IDI_APPLICATION)
         flags = NIF_ICON | NIF_MESSAGE | NIF_TIP
-        nid = (self.hwnd, 0, flags, win32con.WM_USER+20, hicon, "tooltip")
+        nid = (self.hwnd, 0, flags, win32con.WM_USER+20, None, "tooltip")
         Shell_NotifyIcon(NIM_ADD, nid)
         Shell_NotifyIcon(NIM_MODIFY,
                          (self.hwnd, 0, NIF_INFO, win32con.WM_USER+20,
-                          hicon, "SMDA  tooltip",title,200,msg))
+                          None, "SMDA  tooltip",title,200,msg))
         # self.show_balloon(title, msg)
         time.sleep(10)
         DestroyWindow(self.hwnd)
