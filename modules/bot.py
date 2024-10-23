@@ -304,13 +304,13 @@ class Bot:
                 inputs[2].send_keys(Keys.CONTROL + 'A')
                 inputs[2].send_keys(leg_options[i]['dte'])
 
-            show_notification('SMDA', 'Waiting 2mins for you to set options manually...')
+            show_notification('SMDA', 'Waiting 2 minutes for manual setup.')
             time.sleep(60*2)
 
             submit_button = self.wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, 'button[type=submit]')))
             submit_button.click()
 
-            show_notification('SMDA', 'Waiting 3mins for you to set options manually...')
+            show_notification('SMDA', 'Waiting 3 minutes for results...')
             time.sleep(60*3) # Waiting 5 mins to get data
 
             self.browser.execute_script("window.scrollTo(0, document.body.scrollHeight);")
