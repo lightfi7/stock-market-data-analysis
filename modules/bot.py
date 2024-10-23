@@ -314,8 +314,11 @@ class Bot:
             time.sleep(60*3) # Waiting 5 mins to get data
 
             self.browser.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+            time.sleep(3)
             self.browser.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+            time.sleep(3)
             self.browser.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+            time.sleep(3)
 
             # Get result
             labels = self.browser.find_elements(By.CSS_SELECTOR, 'dl > div > dt')
@@ -326,8 +329,11 @@ class Bot:
             #
 
             self.browser.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+            time.sleep(3)
             self.browser.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+            time.sleep(3)
             self.browser.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+            time.sleep(3)
 
             # Download
             trade_log_button = self.browser.execute_script(
