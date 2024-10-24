@@ -64,7 +64,6 @@ def run_window(cb_ready, cb):
     end_entry.insert(0, "2017-04-30")
     end_entry.grid(row=1, column=1, padx=20, pady=10)
 
-
     label_day = tk.Label(dialog, text="Day:", font=label_font, bg='#f0f0f0')
     label_day.grid(row=2, column=0, padx=20, pady=10, sticky='w')
 

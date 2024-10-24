@@ -310,7 +310,7 @@ class Bot:
             submit_button = self.wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, 'button[type=submit]')))
             submit_button.click()
 
-            show_notification('SMDA', 'Waiting 3 minutes for results...')
+            show_notification('SMDA', 'Waiting 3 minutes to get results. Never touch the scroll.')
             time.sleep(60*3) # Waiting 5 mins to get data
 
             self.browser.execute_script("window.scrollTo(0, document.body.scrollHeight);")
@@ -354,6 +354,8 @@ class Bot:
             show_notification('SMDA', 'Downloading the results...')
 
             time.sleep(5)
+
+            self.browser.quit()
         except Exception as e:
             show_notification("Error", e.message)
 
