@@ -49,7 +49,6 @@ def start_thread(start_date, end_date):
         'file': f'{os.path.dirname(os.path.abspath(__file__))}/output.csv'
     })
 
-    root = tk.Tk()
     rows = analyze(f'{os.path.expanduser("~")}/Downloads/trade-log.csv')
     data = pd.DataFrame(rows, columns=['Time', 'Starting Capital', 'Ending Capital', 'Profit/Loss (P/L)', 'CAGR',
                                        'Max Drawdown', 'MAR Ratio'])
@@ -64,13 +63,6 @@ def start_thread(start_date, end_date):
     colors = cmap(norm(data['Profit/Loss (P/L)']))
 
     fig, (ax1, ax2, ax3) = plt.subplots(3, 1, figsize=(19.2, 10.8), constrained_layout=True)
-
-    canvas = FigureCanvasTkAgg(fig, master=root)
-    canvas.draw()
-    toolbar = NavigationToolbar2Tk(canvas, root, pack_toolbar=False)
-    toolbar.update()
-    toolbar.pack(side=tk.BOTTOM, fill=tk.X)
-    canvas.get_tk_widget().pack(side=tk.TOP, fill=tk.BOTH, expand=True)
 
     ax1.bar(data['Time'], data['CAGR'] * 100, color=colors, alpha=0.8, align='center')
     ax1.set_xlabel('Time')
@@ -103,7 +95,6 @@ def start_thread(start_date, end_date):
     ax3.set_xlabel('Time')
     ax3.set_ylabel('Portfolio Value')
     plt.show()
-    root.mainloop()
     pass
 
 def start(start_date, end_date):
