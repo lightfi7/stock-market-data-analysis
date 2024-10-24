@@ -93,7 +93,7 @@ def start(start_date, end_date):
     ax3.set_xlabel('Time')
     ax3.set_ylabel('Portfolio Value')
 
-    plt.show()
+    plt.show(block=True)
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
