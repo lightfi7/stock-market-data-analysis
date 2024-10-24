@@ -26,6 +26,7 @@ class Bot:
         self.actions = ActionChains(self.browser)
 
     def start(self):
+
         # Start Login
         self.browser.get('https://optionomega.com/login')
 
@@ -41,6 +42,7 @@ class Bot:
 
     def run(self, params):
         self.browser.quit()
+        return
         try:
             # Start Backtest
             new_backtest_button = self.wait.until(

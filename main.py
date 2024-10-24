@@ -37,17 +37,19 @@ def ready(start_date, end_date, day):
     df = df.iloc[1:]
     df.to_csv(f'{os.path.dirname(os.path.abspath(__file__))}/output.csv', index=False)
 
+
+
 def start(start_date, end_date):
     # if os.path.exists(f'{os.path.expanduser("~")}/Downloads/trade-log.csv'):
     #     os.remove(f'{os.path.expanduser("~")}/Downloads/trade-log.csv')
 
-    bot = Bot()
-    bot.start()
-    bot.run({
-        'start_date': start_date,
-        'end_date': end_date,
-        'file':f'{os.path.dirname(os.path.abspath(__file__))}/output.csv'
-    })
+    # bot = Bot()
+    # bot.start()
+    # bot.run({
+    #     'start_date': start_date,
+    #     'end_date': end_date,
+    #     'file':f'{os.path.dirname(os.path.abspath(__file__))}/output.csv'
+    # })
 
     root = tk.Tk()
     rows = analyze(f'{os.path.expanduser("~")}/Downloads/trade-log.csv')
