@@ -41,6 +41,7 @@ class Bot:
 
     def run(self, params):
         self.browser.quit()
+        return
         try:
             # Start Backtest
             new_backtest_button = self.wait.until(
