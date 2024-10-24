@@ -102,6 +102,7 @@ def start(start_date, end_date):
     ax3.set_title('Portfolio Value Over Time')
     ax3.set_xlabel('Time')
     ax3.set_ylabel('Portfolio Value')
+    plt.show()
     root.mainloop()
 
 
