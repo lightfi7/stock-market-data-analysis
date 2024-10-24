@@ -40,6 +40,7 @@ class Bot:
         time.sleep(5)
 
     def run(self, params):
+        self.browser.quit()
         try:
             # Start Backtest
             new_backtest_button = self.wait.until(
