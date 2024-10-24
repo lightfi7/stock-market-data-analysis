@@ -40,8 +40,6 @@ class Bot:
         time.sleep(5)
 
     def run(self, params):
-        self.browser.quit()
-        return
         try:
             # Start Backtest
             new_backtest_button = self.wait.until(
@@ -354,13 +352,11 @@ class Bot:
 
             #
             show_notification('SMDA', 'Downloading the results...')
-
             time.sleep(5)
-
             self.browser.quit()
         except Exception as e:
+            self.browser.quit()
             show_notification("Error", e.message)
-
 
         # End Backtest
 
