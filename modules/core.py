@@ -43,13 +43,13 @@ def analyze(path):
         mar_ratio = cagr / abs(max_drawdown) if max_drawdown != 0 else float('inf')
 
         # Display results
-        print(f"Group: {data['Time Opened'].iloc[0]}")
-        print(f"Starting Capital: ${starting_capital:.2f}")
-        print(f"Ending Capital: ${ending_capital:.2f}")
-        print(f"Profit/Loss (P/L): ${pl:.2f}")
-        print(f"CAGR: {cagr:.2%}")
-        print(f"Max Drawdown: {max_drawdown:.2%}")
-        print(f"MAR Ratio: {mar_ratio:.2f}")
+        # print(f"Group: {data['Time Opened'].iloc[0]}")
+        # print(f"Starting Capital: ${starting_capital:.2f}")
+        # print(f"Ending Capital: ${ending_capital:.2f}")
+        # print(f"Profit/Loss (P/L): ${pl:.2f}")
+        # print(f"CAGR: {cagr:.2%}")
+        # print(f"Max Drawdown: {max_drawdown:.2%}")
+        # print(f"MAR Ratio: {mar_ratio:.2f}")
 
         rows.append((group, starting_capital, ending_capital, pl, cagr*100, max_drawdown*100, mar_ratio*100 ))
 
