@@ -85,9 +85,6 @@ def start(start_date, end_date):
         portfolio_values.append(row[2])
         time_series.append(calculate_offset(rows[0][0], row[0]))
 
-    print(time_series)
-    print(portfolio_values)
-
     ax3.plot(time_series, portfolio_values)
     ax3.set_title('Portfolio Value Over Time')
     ax3.set_xlabel('Time')
