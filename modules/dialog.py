@@ -23,7 +23,7 @@ def run_window(cb_ready, cb):
         # Add your action here
         # dialog.destroy()  # Close the dialog after submission
         if cb:
-            cb(start_date, end_date, root, dialog)
+            cb(start_date, end_date)
 
     def on_close():
         dialog.destroy()  # Close the dialog
