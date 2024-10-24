@@ -342,6 +342,8 @@ class Bot:
             print(trade_log_button.text)
             trade_log_button.click()
 
+            time.sleep(10)
+
             download_button = self.browser.execute_script(
                 "return [...document.querySelectorAll('.has-tooltip')].find(e => e.textContent.includes('Export to CSV'));"
             )

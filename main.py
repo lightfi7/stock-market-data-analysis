@@ -33,15 +33,16 @@ def ready(start_date, end_date, day):
     df.to_csv(f'{os.path.dirname(os.path.abspath(__file__))}/output.csv', index=False)
 
 def start(start_date, end_date):
-    bot = Bot()
-    bot.start()
-    bot.run({
-        'start_date': start_date,
-        'end_date': end_date,
-        'file':f'{os.path.dirname(os.path.abspath(__file__))}/output.csv'
-    })
-    if os.path.exists(f'{os.path.expanduser("~")}/Downloads/trade-log.csv'):
-        os.remove(f'{os.path.expanduser("~")}/Downloads/trade-log.csv')
+    # if os.path.exists(f'{os.path.expanduser("~")}/Downloads/trade-log.csv'):
+    #     os.remove(f'{os.path.expanduser("~")}/Downloads/trade-log.csv')
+    #
+    # bot = Bot()
+    # bot.start()
+    # bot.run({
+    #     'start_date': start_date,
+    #     'end_date': end_date,
+    #     'file':f'{os.path.dirname(os.path.abspath(__file__))}/output.csv'
+    # })
 
     rows = analyze(f'{os.path.expanduser("~")}/Downloads/trade-log.csv')
     data = pd.DataFrame(rows, columns=['Time', 'Starting Capital', 'Ending Capital', 'Profit/Loss (P/L)', 'CAGR',
