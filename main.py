@@ -38,9 +38,9 @@ def ready(start_date, end_date, day):
     df.to_csv(f'{os.path.dirname(os.path.abspath(__file__))}/output.csv', index=False)
 
 def start(start_date, end_date):
-    # if os.path.exists(f'{os.path.expanduser("~")}/Downloads/trade-log.csv'):
-    #     os.remove(f'{os.path.expanduser("~")}/Downloads/trade-log.csv')
-    #
+    if os.path.exists(f'{os.path.expanduser("~")}/Downloads/trade-log.csv'):
+        os.remove(f'{os.path.expanduser("~")}/Downloads/trade-log.csv')
+
     bot = Bot()
     bot.start()
     bot.run({
@@ -66,6 +66,7 @@ def start(start_date, end_date):
     fig, (ax1, ax2, ax3) = plt.subplots(3, 1, figsize=(19.2, 10.8), constrained_layout=True)
 
     canvas = FigureCanvasTkAgg(fig, master=root)
+    canvas.draw()
     toolbar = NavigationToolbar2Tk(canvas, root, pack_toolbar=False)
     toolbar.update()
     toolbar.pack(side=tk.BOTTOM, fill=tk.X)
@@ -101,7 +102,7 @@ def start(start_date, end_date):
     ax3.set_title('Portfolio Value Over Time')
     ax3.set_xlabel('Time')
     ax3.set_ylabel('Portfolio Value')
-    canvas.draw()
+    plt.show()
     root.mainloop()
 
 
