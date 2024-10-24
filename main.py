@@ -1,6 +1,6 @@
 import os
 import tkinter as tk
-
+from threading import Thread
 import matplotlib.pyplot as plt
 import matplotlib.table as table
 import pandas as pd
@@ -37,19 +37,14 @@ def ready(start_date, end_date, day):
     df = df.iloc[1:]
     df.to_csv(f'{os.path.dirname(os.path.abspath(__file__))}/output.csv', index=False)
 
-
-
-def start(start_date, end_date):
-    # if os.path.exists(f'{os.path.expanduser("~")}/Downloads/trade-log.csv'):
-    #     os.remove(f'{os.path.expanduser("~")}/Downloads/trade-log.csv')
-
-    # bot = Bot()
-    # bot.start()
-    # bot.run({
-    #     'start_date': start_date,
-    #     'end_date': end_date,
-    #     'file':f'{os.path.dirname(os.path.abspath(__file__))}/output.csv'
-    # })
+def bot_thread(start_date, end_date):
+    bot = Bot()
+    bot.start()
+    bot.run({
+        'start_date': start_date,
+        'end_date': end_date,
+        'file': f'{os.path.dirname(os.path.abspath(__file__))}/output.csv'
+    })
 
     root = tk.Tk()
     rows = analyze(f'{os.path.expanduser("~")}/Downloads/trade-log.csv')
@@ -106,6 +101,14 @@ def start(start_date, end_date):
     ax3.set_ylabel('Portfolio Value')
     plt.show()
     root.mainloop()
+    pass
+
+def start(start_date, end_date):
+    # if os.path.exists(f'{os.path.expanduser("~")}/Downloads/trade-log.csv'):
+    #     os.remove(f'{os.path.expanduser("~")}/Downloads/trade-log.csv')
+    thread = Thread(target=bot_thread, args=(start_date, end_date))
+    thread.start()
+
 
 
 # Press the green button in the gutter to run the script.
