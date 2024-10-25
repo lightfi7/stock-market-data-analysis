@@ -312,7 +312,7 @@ class Bot:
             submit_button.click()
 
             show_notification('SMDA', 'Waiting 3 minutes to get results. Never touch the scroll.')
-            time.sleep(60*3) # Waiting 5 mins to get data
+            time.sleep(60*5) # Waiting 5 mins to get data
 
             self.browser.execute_script("window.scrollTo(0, document.body.scrollHeight);")
             time.sleep(3)
