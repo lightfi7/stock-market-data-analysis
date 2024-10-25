@@ -353,13 +353,11 @@ class Bot:
 
             #
             show_notification('SMDA', 'Downloading the results...')
-
             time.sleep(5)
-
             self.browser.quit()
         except Exception as e:
+            self.browser.quit()
             show_notification("Error", e.message)
-
 
         # End Backtest
 
