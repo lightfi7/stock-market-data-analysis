@@ -71,7 +71,7 @@ def bot_thread(start_date, end_date, root):
     toolbar.pack(side=tk.BOTTOM, fill=tk.X)
     canvas.get_tk_widget().pack(side=tk.TOP, fill=tk.BOTH, expand=True)
 
-    ax1.bar(data['Time'], data['CAGR'] * 100, color=colors, alpha=0.8, align='center')
+    ax1.bar(data['Time'], data['CAGR'], color=colors, alpha=0.8, align='center')
     ax1.set_xlabel('Time')
     ax1.set_ylabel('CAGR (%)')
     ax1.set_title('CAGR Bar Chart with Color Based on CAGR')
@@ -79,9 +79,7 @@ def bot_thread(start_date, end_date, root):
 
     # filter best...
     sorted_rows = sorted(rows, key=lambda x: x[3])
-    sorted_rows[4]*=100
-    sorted_rows[5]*=100
-    sorted_rows[6]*=100
+
     tb = table.table(cellText=sorted_rows[-1:],
                      colLabels=['Time', 'Starting Capital', 'Ending Capital', 'Profit/Loss (P/L)', 'CAGR',
                                 'Max Drawdown', 'MAR Ratio'],
