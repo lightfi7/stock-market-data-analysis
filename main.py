@@ -1,6 +1,8 @@
 import os
 import tkinter as tk
 from threading import Thread
+from tkinter import Toplevel
+
 import matplotlib.pyplot as plt
 import matplotlib.table as table
 import pandas as pd
@@ -37,7 +39,7 @@ def ready(start_date, end_date, day):
     df = df.iloc[1:]
     df.to_csv(f'{os.path.dirname(os.path.abspath(__file__))}/output.csv', index=False)
 
-def bot_thread(start_date, end_date):
+def bot_thread(start_date, end_date, root):
     bot = Bot()
     bot.start()
     bot.run({
@@ -46,7 +48,7 @@ def bot_thread(start_date, end_date):
         'file': f'{os.path.dirname(os.path.abspath(__file__))}/output.csv'
     })
 
-    root = tk.Tk()
+    # root = tk.Tk()
     rows = analyze(f'{os.path.expanduser("~")}/Downloads/trade-log.csv')
     data = pd.DataFrame(rows, columns=['Time', 'Starting Capital', 'Ending Capital', 'Profit/Loss (P/L)', 'CAGR',
                                        'Max Drawdown', 'MAR Ratio'])
@@ -61,10 +63,10 @@ def bot_thread(start_date, end_date):
     colors = cmap(norm(data['Profit/Loss (P/L)']))
 
     fig, (ax1, ax2, ax3) = plt.subplots(3, 1, figsize=(19.2, 10.8), constrained_layout=True)
-
-    canvas = FigureCanvasTkAgg(fig, master=root)
+    dialog=Toplevel(root)
+    canvas = FigureCanvasTkAgg(fig, master=dialog)
     canvas.draw()
-    toolbar = NavigationToolbar2Tk(canvas, root, pack_toolbar=False)
+    toolbar = NavigationToolbar2Tk(canvas, dialog, pack_toolbar=False)
     toolbar.update()
     toolbar.pack(side=tk.BOTTOM, fill=tk.X)
     canvas.get_tk_widget().pack(side=tk.TOP, fill=tk.BOTH, expand=True)
@@ -99,14 +101,13 @@ def bot_thread(start_date, end_date):
     ax3.set_title('Portfolio Value Over Time')
     ax3.set_xlabel('Time')
     ax3.set_ylabel('Portfolio Value')
-    plt.show()
-    root.mainloop()
+    # root.mainloop()
     pass
 
-def start(start_date, end_date):
-    # if os.path.exists(f'{os.path.expanduser("~")}/Downloads/trade-log.csv'):
-    #     os.remove(f'{os.path.expanduser("~")}/Downloads/trade-log.csv')
-    thread = Thread(target=bot_thread, args=(start_date, end_date))
+def start(start_date, end_date, root):
+    if os.path.exists(f'{os.path.expanduser("~")}/Downloads/trade-log.csv'):
+        os.remove(f'{os.path.expanduser("~")}/Downloads/trade-log.csv')
+    thread = Thread(target=bot_thread, args=(start_date, end_date, root))
     thread.start()
 
 
