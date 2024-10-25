@@ -79,7 +79,9 @@ def bot_thread(start_date, end_date, root):
 
     # filter best...
     sorted_rows = sorted(rows, key=lambda x: x[3])
-
+    sorted_rows[4]*=100
+    sorted_rows[5]*=100
+    sorted_rows[6]*=100
     tb = table.table(cellText=sorted_rows[-1:],
                      colLabels=['Time', 'Starting Capital', 'Ending Capital', 'Profit/Loss (P/L)', 'CAGR',
                                 'Max Drawdown', 'MAR Ratio'],

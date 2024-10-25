@@ -51,6 +51,6 @@ def analyze(path):
         # print(f"Max Drawdown: {max_drawdown:.2%}")
         # print(f"MAR Ratio: {mar_ratio:.2f}")
 
-        rows.append((group, starting_capital, ending_capital, pl, cagr*100, max_drawdown*100, mar_ratio*100 ))
+        rows.append((group, starting_capital, ending_capital, pl, cagr, max_drawdown, mar_ratio ))
 
     return rows
