@@ -6,24 +6,29 @@ def run_window(cb_ready, cb):
         start_date = start_entry.get()
         end_date = end_entry.get()
         day = day_entry.get()
+        is_period = check_var.get()
+        period = period_entry.get()
         print(f"Start Date: {start_date}")
         print(f"End Date: {end_date}")
         print(f"Day: {day}")
+        print(f"Period: {period}")
         if cb_ready:
-            cb_ready(start_date, end_date, day)
+            cb_ready(start_date, end_date, day, period, is_period)
         pass
 
     def submit_action():
         start_date = start_entry.get()
         end_date = end_entry.get()
         day = day_entry.get()
+        is_period = check_var.get()
+        period = period_entry.get()
         print(f"Start Date: {start_date}")
         print(f"End Date: {end_date}")
         print(f"Day: {day}")
         # Add your action here
         # dialog.destroy()  # Close the dialog after submission
         if cb:
-            cb(start_date, end_date, root)
+            cb(start_date, end_date, is_period, root)
 
     def on_close():
         dialog.destroy()  # Close the dialog
@@ -67,17 +72,35 @@ def run_window(cb_ready, cb):
     label_day = tk.Label(dialog, text="Day:", font=label_font, bg='#f0f0f0')
     label_day.grid(row=2, column=0, padx=20, pady=10, sticky='w')
 
+
     day_entry = ttk.Entry(dialog, font=entry_font, width=30)
     day_entry.insert(0, "0")
     day_entry.grid(row=2, column=1, padx=20, pady=10)
 
+    check_var = tk.BooleanVar()
+    label_period = tk.Label(dialog, text="Period:", font=label_font, bg='#f0f0f0')
+    label_period.grid(row=4, column=0, padx=20, pady=10, sticky='w')
+
+    period_entry = ttk.Entry(dialog, font=entry_font, width=30, state=tk.DISABLED)
+    period_entry.insert(0, "0")
+    period_entry.grid(row=4, column=1, padx=20, pady=10)
+
+    def chk_period_command():
+        if not check_var.get():
+            period_entry.config(state=tk.DISABLED)
+        else:
+            period_entry.config(state=tk.NORMAL)
+
+    chk_period = tk.Checkbutton(dialog, text='Period', onvalue=True, offvalue=False, variable=check_var, command=chk_period_command)
+    chk_period.grid(row=3, column=0, columnspan=2, pady=10)
+
     # Create a submit button
     ready_button = ttk.Button(dialog, text="Ready", command=ready_action)
-    ready_button.grid(row=3, column=0, columnspan=2, pady=10)
+    ready_button.grid(row=5, column=0, columnspan=2, pady=10)
 
     # Create a submit button
     submit_button = ttk.Button(dialog, text="Submit", command=submit_action)
-    submit_button.grid(row=4, column=0, columnspan=2, pady=10)
+    submit_button.grid(row=6, column=0, columnspan=2, pady=10)
 
     # Configure grid weights for better spacing
     dialog.grid_columnconfigure(0, weight=1)

@@ -19,13 +19,13 @@ from modules.core import analyze
 from modules.dialog import run_window
 from modules.utils import get_date_range, get_days, generate_times, calculate_offset
 
-def ready(start_date, end_date, day):
+def ready(start_date, end_date, day, period, is_period):
     # start_date = "2017-01-01"
     # end_date = "2017-12-31"
     # dates = get_date_range(start_date, end_date)
     dates = get_days(start_date, end_date, int(day))
 
-    times = generate_times('9:32', '15:59')
+    times = generate_times('9:32', '15:59', step_minutes=int(period) if is_period else 3)
 
     last = ''
     rows = []
@@ -39,12 +39,13 @@ def ready(start_date, end_date, day):
     df = df.iloc[1:]
     df.to_csv(f'{os.path.dirname(os.path.abspath(__file__))}/output.csv', index=False)
 
-def bot_thread(start_date, end_date, root):
+def bot_thread(start_date, end_date, is_period,  root):
     bot = Bot()
     bot.start()
     bot.run({
         'start_date': start_date,
         'end_date': end_date,
+        'is_period': is_period,
         'file': f'{os.path.dirname(os.path.abspath(__file__))}/output.csv'
     })
 
@@ -74,11 +75,16 @@ def bot_thread(start_date, end_date, root):
     ax1.bar(data['Time'], data['CAGR'], color=colors, alpha=0.8, align='center')
     ax1.set_xlabel('Time')
     ax1.set_ylabel('CAGR (%)')
-    ax1.set_title('CAGR Bar Chart with Color Based on CAGR')
+    ax1.set_title(f'SPX\nCAGR Bar Chart with Color Based on CAGR\n{start_date}-{end_date}')
     ax1.set_xticklabels(data['Time'], rotation=90, ha='left', fontsize=8)
 
     # filter best...
     sorted_rows = sorted(rows, key=lambda x: x[3])
+    sorted_rows[1]=f'${sorted_rows[1]}'
+    sorted_rows[2]=f'${sorted_rows[2]}'
+    sorted_rows[3]=f'${sorted_rows[3]}'
+    sorted_rows[4]=f'{sorted_rows[4]:.2f}%'
+    sorted_rows[5]=f'{sorted_rows[5]:.2f}%'
 
     tb = table.table(cellText=sorted_rows[-1:],
                      colLabels=['Time', 'Starting Capital', 'Ending Capital', 'Profit/Loss (P/L)', 'CAGR',
@@ -87,6 +93,7 @@ def bot_thread(start_date, end_date, root):
                      loc='center',
                      cellLoc='center'
                      )
+    tb.scale(1,2)
     ax2.axis('off')
     ax2.set_title('Optimal Entries by Day', loc='center')
     ax2.add_table(tb)
@@ -104,10 +111,10 @@ def bot_thread(start_date, end_date, root):
     # root.mainloop()
     pass
 
-def start(start_date, end_date, root):
+def start(start_date, end_date, is_period, root):
     if os.path.exists(f'{os.path.expanduser("~")}/Downloads/trade-log.csv'):
         os.remove(f'{os.path.expanduser("~")}/Downloads/trade-log.csv')
-    thread = Thread(target=bot_thread, args=(start_date, end_date, root))
+    thread = Thread(target=bot_thread, args=(start_date, end_date, is_period, root))
     thread.start()
 
 
