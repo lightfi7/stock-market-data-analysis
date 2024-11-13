@@ -80,20 +80,21 @@ def bot_thread(start_date, end_date, is_period,  root):
 
     # filter best...
     sorted_rows = sorted(rows, key=lambda x: x[3])
-    sorted_rows[1]=f'${sorted_rows[1]}'
-    sorted_rows[2]=f'${sorted_rows[2]}'
-    sorted_rows[3]=f'${sorted_rows[3]}'
-    sorted_rows[4]=f'{sorted_rows[4]:.2f}%'
-    sorted_rows[5]=f'{sorted_rows[5]:.2f}%'
+    sorted_row = sorted_rows[-1:][0]
+    v1=f'${sorted_row[1]}'
+    v2=f'${sorted_row[2]}'
+    v3=f'${sorted_row[3]}'
+    v4=f'{sorted_row[4]:.2f}%'
+    v5=f'{sorted_row[5]:.2f}%'
+    v6=f'{sorted_row[6]:.2f}%'
 
-    tb = table.table(cellText=sorted_rows[-1:],
+    tb = table.table(cellText=[[sorted_row[0], v1, v2, v3, v4, v5, v6]],
                      colLabels=['Time', 'Starting Capital', 'Ending Capital', 'Profit/Loss (P/L)', 'CAGR',
                                 'Max Drawdown', 'MAR Ratio'],
                      ax=ax2,
                      loc='center',
                      cellLoc='center'
                      )
-    tb.scale(1,2)
     ax2.axis('off')
     ax2.set_title('Optimal Entries by Day', loc='center')
     ax2.add_table(tb)
