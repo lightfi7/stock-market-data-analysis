@@ -180,7 +180,7 @@ class Bot:
             new_backtest_form = self.wait.until(EC.element_to_be_clickable((By.TAG_NAME, 'form')))
             if params['is_period']:
                 toggles = new_backtest_form.find_elements(By.CSS_SELECTOR, 'button.toggle')
-                toggles[15].click()
+                # toggles[15].click()
 
 
             input_file = self.wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, 'input[type=file]')))
